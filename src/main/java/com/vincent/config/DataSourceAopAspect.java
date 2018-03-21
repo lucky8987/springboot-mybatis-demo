@@ -1,8 +1,9 @@
 package com.vincent.config;
 
-import org.apache.ibatis.annotations.Select;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.core.PriorityOrdered;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,15 +11,24 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class DataSourceAopAspect {
+public class DataSourceAopAspect implements PriorityOrdered {
 
-    @Before(value = "@annotation(select)")
-    public void setReadDataSource(Select select) {
+    @Before(value = "execution(* com.vincent.dao.UserDao.get*(..))")
+    public void setReadDataSource(JoinPoint point) {
         DataSourceContextHolder.setRead();
     }
 
-    /*@Before(value = "@annotation(insert) || @annotation(update) || @annotation(delete)")
-    public void setReadDataSource(Insert insert, Update update, Delete delete) {
+    @Before(value = "execution(* com.vincent.dao.UserDao.add*(..))")
+    public void setWriteDataSource(JoinPoint point) {
         DataSourceContextHolder.setWrite();
-    }*/
+    }
+
+    /**
+     * 自定义优先级，确保在事务开启前切换数据源，否则事务不生效
+     * @return
+     */
+    @Override
+    public int getOrder() {
+        return 1;
+    }
 }
