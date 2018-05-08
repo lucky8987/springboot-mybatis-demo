@@ -19,7 +19,7 @@ public class UserDaoTest {
     @Transactional
     public void add() {
         TUser user = new TUser();
-        user.setUserName("vicent.long");
+        user.setUserName("vicent.fly");
         user.setPassword("123456");
         user.setPhone("130202020");
         dao.add(user);
@@ -27,7 +27,7 @@ public class UserDaoTest {
 
     @Test
     public void getById() {
-        TUser user1 = dao.getById(1);
-        System.out.println("user" + user1);
+       TUser user1 = dao.getById(100);
+       System.out.println("user" + user1);
     }
 }

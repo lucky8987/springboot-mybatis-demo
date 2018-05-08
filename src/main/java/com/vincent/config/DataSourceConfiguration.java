@@ -1,14 +1,9 @@
 package com.vincent.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.vincent.plugin.MyPlugin;
-import java.util.HashMap;
-import java.util.Map;
 import javax.sql.DataSource;
-import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
