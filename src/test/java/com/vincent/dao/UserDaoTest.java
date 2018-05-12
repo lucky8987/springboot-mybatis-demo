@@ -5,8 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -16,10 +16,10 @@ public class UserDaoTest {
     private UserDao dao;
 
     @Test
-    @Rollback
+    @Transactional
     public void add() {
         TUser user = new TUser();
-        user.setUserName("vicent.long");
+        user.setUserName("vicent.fly");
         user.setPassword("123456");
         user.setPhone("130202020");
         dao.add(user);
@@ -27,9 +27,7 @@ public class UserDaoTest {
 
     @Test
     public void getById() {
-        TUser user1 = dao.getById(1000);
-        System.out.println("user1" + user1);
-        TUser user2 = dao.getById(1000);
-        System.out.println("user2" + user2);
+       TUser user1 = dao.getById(100);
+       System.out.println("user" + user1);
     }
 }
